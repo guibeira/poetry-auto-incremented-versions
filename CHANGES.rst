@@ -1,3 +1,9 @@
+0.2.2
+~~~~~
+
+* Fixing the title release
+  the complete msg of what was added
+
 0.2.1
 ~~~~~
 
