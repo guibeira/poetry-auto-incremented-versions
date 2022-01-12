@@ -1,19 +1,8 @@
 # from https://zenn.dev/u_not/articles/abcc0ebd71655b
-
 name: Upload Python Package
-  on:
+on:
   push:
-    branches: [ $default-branch ]
-# on:
-  # workflow_dispatch:
-  #   inputs:
-  #     version:
-  #       description: "Next Version"
-  #       required: true
-  #       default: "x.y.z"
-  #     release_note:
-  #       description: "release note"
-  #       required: false
+    branches: main 
 
 jobs:
   deploy:
