@@ -1,16 +1,19 @@
 # from https://zenn.dev/u_not/articles/abcc0ebd71655b
 
 name: Upload Python Package
-on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Next Version"
-        required: true
-        default: "x.y.z"
-      release_note:
-        description: "release note"
-        required: false
+  on:
+  push:
+    branches: [ $default-branch ]
+# on:
+  # workflow_dispatch:
+  #   inputs:
+  #     version:
+  #       description: "Next Version"
+  #       required: true
+  #       default: "x.y.z"
+  #     release_note:
+  #       description: "release note"
+  #       required: false
 
 jobs:
   deploy:
@@ -34,18 +37,22 @@ jobs:
         pip install poetry-version-plugin
     - name: Build Poetry
       run: |
-        git tag v${{ github.event.inputs.version }}
+        git tag v$(cat CHANGES.rst | awk '/^[0-9]+\.[0-9]+(\.[0-9]+)?/' | head -n1)
         cd poetry-auto-incremented-versions && poetry build
+    - name: Getting version
+      run: echo "NEW_VERSION=$(cat CHANGES.rst | awk '/^[0-9]+\.[0-9]+(\.[0-9]+)?/' | head -n1)" >> $GITHUB_ENV
+    - name: Getting description
+      run: echo "DESCRIPTION_VERSION=$(grep -Eo '\* (.?)+'\  CHANGES.rst | head -1)" >> $GITHUB_ENV
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: v${{ github.event.inputs.version }}
-        release_name: Release v${{ github.event.inputs.version }}
+        tag_name: v${{ env.NEW_VERSION}} 
+        release_name: Release v${{ env.NEW_VERSION}}
         body: |
-          ${{ github.event.inputs.release_note }}
+          ${{ env.DESCRIPTION_VERSION }}
         draft: false
         prerelease: false
     - name: Get Name of Artifact
