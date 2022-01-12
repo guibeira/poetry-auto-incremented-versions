@@ -31,7 +31,7 @@ jobs:
     - name: Getting version
       run: echo "NEW_VERSION=$(cat CHANGES.rst | awk '/^[0-9]+\.[0-9]+(\.[0-9]+)?/' | head -n1)" >> $GITHUB_ENV
     - name: Getting description
-      run: echo "DESCRIPTION_VERSION=$(grep -Eo '\* (.?)+'\  CHANGES.rst | head -1)" >> $GITHUB_ENV
+      run: echo "DESCRIPTION_VERSION=$(cat CHANGES.rst | awk '/* \w+/' | head -n1)" >> $GITHUB_ENV
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
