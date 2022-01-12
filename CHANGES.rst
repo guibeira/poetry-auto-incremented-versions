@@ -1,3 +1,8 @@
+0.3.0
+~~~~~
+
+* Add a new class (example) 
+
 0.2.3
 ~~~~~
 
