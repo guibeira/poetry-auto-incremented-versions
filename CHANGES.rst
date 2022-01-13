@@ -1,3 +1,8 @@
+0.3.2
+~~~~~
+
+* Organize the files (example) 
+
 0.3.0
 ~~~~~
 
