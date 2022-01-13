@@ -1,7 +1,14 @@
+0.3.3
+~~~~~
+
+* Add support for music release (example) 
+https://youtu.be/bPlOAh1NbHY
+
 0.3.2
 ~~~~~
 
 * Organize the files (example) 
+https://youtu.be/bPlOAh1NbHY
 
 0.3.0
 ~~~~~
